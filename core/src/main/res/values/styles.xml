@@ -1,3 +1,56 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#0288d1</item>
+        <item name="colorPrimaryDark">#0288d1</item>
+        <item name="colorPrimaryVariant">#56c2fd</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSecondary">#0288d1</item>
+        <item name="colorSecondaryVariant">#555555</item>
+        <item name="colorOnSecondary">#ffffff</item>
+        <item name="backgroundColor">#ffffff</item>
+        <item name="colorOnBackground">#555555</item>
+        <item name="colorSurface">#ffffff</item>
+        <item name="colorOnSurface">#555555</item>
+        <item name="colorAccent">#0288d1</item>
+        <item name="colorControlNormal">#ffffff</item>
+        <item name="android:windowActionModeOverlay">true</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="android:actionModeStyle">@style/ActionModeTheme</item>
+        <item name="actionModeStyle">@style/ActionModeTheme</item>
+        <item name="android:actionModeCloseButtonStyle">@style/ActionModeTheme.CloseButton</item>
+        <item name="actionModeCloseButtonStyle">@style/ActionModeTheme.CloseButton</item>
+        <item name="android:progressBarStyle">@style/LoaderTheme</item>
+        <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Primary</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="LoaderTheme" parent="Widget.AppCompat.ProgressBar">
+        <item name="android:colorPrimary">?attr/colorPrimary</item>
+    </style>
+
+    <style name="ActionModeTheme" parent="Widget.AppCompat.ActionMode">
+        <item name="android:background">@drawable/actionbar_background</item>
+        <item name="background">@drawable/actionbar_background</item>
+        <item name="android:titleTextStyle">@style/ActionModeTheme.Title</item>
+        <item name="titleTextStyle">@style/ActionModeTheme.Title</item>
+    </style>
+
+    <style name="ActionModeTheme.Title" parent="TextAppearance.AppCompat.Widget.ActionMode.Title">
+        <item name="android:textColor">?attr/colorOnSecondary</item>
+    </style>
+
+    <style name="ActionModeTheme.CloseButton" parent="Widget.AppCompat.ActionButton.CloseMode">
+        <item name="tint">?attr/colorOnSecondary</item>
+    </style>
+
 </resources>
