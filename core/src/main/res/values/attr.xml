@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="StatusView">
+        <attr name="view_title_text" format="string" />
+        <attr name="view_subtitle_text" format="string" />
+        <attr name="view_show_button" format="boolean" />
+        <attr name="view_button_text" format="string" />
+    </declare-styleable>
+</resources>
