@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_create_an_account">Don\'t registered yer? Create an account</string>
+    <string name="login_sign_in">Sign in</string>
+    <string name="login_sign_up">Sign up</string>
+    <string name="login_confirm_password_hint">Confirm Password</string>
+    <string name="login_password_hint">Password</string>
+    <string name="login_email_hint">Email</string>
+    <string name="login_sign_in_instead">Sign in instead</string>
+</resources>

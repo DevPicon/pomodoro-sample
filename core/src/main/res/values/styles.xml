@@ -53,4 +53,24 @@
         <item name="tint">?attr/colorOnSecondary</item>
     </style>
 
+    <!-- Login -->
+    <style name="LoginTheme" parent="AppTheme">
+        <item name="textInputStyle">@style/LoginTextTextInputLayout</item>
+        <item name="editTextStyle">@style/LoginTextTextInputEditText</item>
+    </style>
+
+    <style name="LoginTextTextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxBackgroundColor">?attr/colorSurface</item>
+        <item name="android:background">?attr/colorSurface</item>
+    </style>
+
+    <style name="LoginTextTextInputEditText" parent="Widget.MaterialComponents.TextInputEditText.FilledBox">
+        <item name="android:background">?attr/colorSurface</item>
+    </style>
+
+    <style name="LoginBackground">
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+
 </resources>
