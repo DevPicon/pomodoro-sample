@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "My Pomodoro Sample"
 include ':app'
 include ':core'
+include ':features:login'
