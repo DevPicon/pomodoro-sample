@@ -3,6 +3,8 @@ package pe.devpicon.android.codelab.pomodoro.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import pe.devpicon.android.codelab.pomodoro.core.Event
 
 class LoginViewModel : ViewModel() {
@@ -20,13 +22,36 @@ class LoginViewModel : ViewModel() {
 
     fun postEvent(event: LoginScreenEvent) {
         when (event) {
-            is LoginScreenEvent.OnMainButtonClicked -> TODO()
+            is LoginScreenEvent.OnMainButtonClicked -> {
+                when (loginMode) {
+                    is LoginScreenMode.SignInMode -> {
+                        startSignIn()
+                    }
+                    is LoginScreenMode.SignUpMode -> {
+                        startSignUp()
+                    }
+                }
+            }
             is LoginScreenEvent.OnSecondaryButtonClicked -> toggleMode()
             is LoginScreenEvent.OnTextChanged -> {
                 username = event.username
                 password = event.password
                 confirmPassword = event.confirmPassword
             }
+        }
+    }
+
+    private fun startSignUp() {
+        viewModelScope.launch {
+            _screenState.value = Event(LoginScreenState.Loading)
+            TODO("Not yet implemented")
+        }
+    }
+
+    private fun startSignIn() {
+        viewModelScope.launch {
+            _screenState.value = Event(LoginScreenState.Loading)
+            TODO("Not yet implemented")
         }
     }
 
