@@ -19,5 +19,5 @@ abstract class SuspendableUseCase<in P, out R>(
         }
     }
 
-    protected abstract fun execute(parameters: P): R
+    protected abstract suspend fun execute(parameters: P): R
 }
