@@ -1,12 +1,14 @@
 package pe.devpicon.android.codelab.pomodoro.data.di
 
 import com.google.firebase.auth.FirebaseAuth
+import pe.devpicon.android.codelab.pomodoro.data.common.ErrorHandlerImpl
 import pe.devpicon.android.codelab.pomodoro.data.local.UserLocalDataSource
 import pe.devpicon.android.codelab.pomodoro.data.local.UserLocalDataSourceImpl
 import pe.devpicon.android.codelab.pomodoro.data.mapper.DomainMapper
 import pe.devpicon.android.codelab.pomodoro.data.remote.LoginRemoteDataSource
 import pe.devpicon.android.codelab.pomodoro.data.remote.LoginRemoteDataSourceImpl
 import pe.devpicon.android.codelab.pomodoro.data.repository.LoginRepositoryImpl
+import pe.devpicon.android.codelab.pomodoro.domain.common.ErrorHandler
 import pe.devpicon.android.codelab.pomodoro.domain.repository.LoginRepository
 
 object DataModule {
@@ -23,4 +25,5 @@ object DataModule {
         domainMapper = DomainMapper()
     )
 
+    val errorHandler: ErrorHandler = ErrorHandlerImpl()
 }
