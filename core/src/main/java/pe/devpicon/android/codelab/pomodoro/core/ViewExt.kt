@@ -21,7 +21,7 @@ fun Fragment.showSnackBar(
 
 fun Fragment.showSnackBarError(
     message: String,
-    duration: Int
+    duration: Int = Snackbar.LENGTH_LONG
 ) {
     showSnackBar(message, duration, com.google.android.material.R.color.design_default_color_error)
 }
