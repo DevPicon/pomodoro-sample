@@ -11,6 +11,8 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import pe.devpicon.android.codelab.pomodoro.core.showSnackBarError
+import pe.devpicon.android.codelab.pomodoro.di.DomainModule
 import pe.devpicon.android.codelab.pomodoro.login.databinding.FragmentLoginBinding
 
 class LoginFragment : Fragment() {
@@ -85,6 +87,10 @@ class LoginFragment : Fragment() {
     private fun observeViewModelChanges() {
         viewModel.screenState.observe(viewLifecycleOwner) {
             onNewState(it.peekContent())
+        }
+
+        viewModel.error.observe(viewLifecycleOwner){
+            showSnackBarError(it.peekContent().message)
         }
     }
 
