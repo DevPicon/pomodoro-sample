@@ -36,6 +36,8 @@ dependencies {
 
     implementation project(":core")
     implementation project(':features:login')
+    implementation project(":domain")
+    implementation project(":data")
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -50,8 +52,4 @@ dependencies {
     def nav_version = "2.4.0"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
-
-    // Firebase
-    implementation platform('com.google.firebase:firebase-bom:29.0.4')
-    implementation 'com.google.firebase:firebase-analytics-ktx'
 }

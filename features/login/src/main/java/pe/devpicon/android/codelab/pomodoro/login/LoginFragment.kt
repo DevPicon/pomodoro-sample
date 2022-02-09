@@ -6,6 +6,7 @@ import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
@@ -17,11 +18,11 @@ import pe.devpicon.android.codelab.pomodoro.login.databinding.FragmentLoginBindi
 
 class LoginFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = LoginFragment()
+    private val viewModel: LoginViewModel by viewModels {
+        LoginViewModelFactory(
+            DomainModule.signInUseCase, DomainModule.signUpUseCase
+        )
     }
-
-    private val viewModel: LoginViewModel by viewModels()
 
     private lateinit var binding: FragmentLoginBinding
 
@@ -110,6 +111,11 @@ class LoginFragment : Fragment() {
                 binding.btnSecondary.text = resources.getString(R.string.login_sign_in_instead)
                 binding.btnLogin.text = resources.getString(R.string.login_sign_up)
             }
+            is LoginScreenState.Success -> Toast.makeText(
+                requireActivity(),
+                state.data,
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 

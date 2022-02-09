@@ -13,7 +13,10 @@ import pe.devpicon.android.codelab.pomodoro.domain.model.User
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.login.SignInUseCase
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.login.SignUpUseCase
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(
+    private val signUpUseCase: SignUpUseCase,
+    private val signInUseCase: SignInUseCase
+) : ViewModel() {
 
     private var username: String = ""
     private var password: String = ""
