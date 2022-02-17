@@ -1,7 +1,6 @@
 package pe.devpicon.android.codelab.pomodoro.task.list.adapter
 
 import android.text.format.DateFormat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import pe.devpicon.android.codelab.pomodoro.task.databinding.RowTaskItemBinding
 
@@ -14,7 +13,6 @@ class TaskListViewHolder(
             tvTaskName.text = data.name
             tvTaskDate.text = DateFormat.getDateFormat(itemView.context).format(data.creationDate)
             tvEstPommodoros.text = data.estimatedPomodoros
-            ivTaskCheck.isVisible = data.completed
         }
     }
 }

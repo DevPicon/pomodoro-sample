@@ -10,6 +10,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pe.devpicon.android.codelab.pomodoro.core.observeEvent
@@ -110,6 +111,7 @@ class TaskListFragment : Fragment() {
     private fun initViews() {
         setupAddButton()
         configureStatusView()
+        configureTaskList()
     }
 
     private fun setupAddButton() {
@@ -121,6 +123,13 @@ class TaskListFragment : Fragment() {
     private fun configureStatusView() {
         binding.statusView.setButtonAction {
             viewModel.postEvent(TaskListScreenEvent.AddTaskPressed)
+        }
+    }
+
+    private fun configureTaskList() {
+        with(binding.rvTasks) {
+            this.adapter = taskListAdapter
+            this.layoutManager = LinearLayoutManager(context)
         }
     }
 
