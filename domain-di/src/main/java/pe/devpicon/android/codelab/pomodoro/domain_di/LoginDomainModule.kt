@@ -15,7 +15,7 @@ import pe.devpicon.android.codelab.pomodoro.domain.usecase.login.SignUpUseCase
 
 @Module
 @InstallIn(SingletonComponent::class)
-object UseCaseModule {
+object LoginDomainModule {
 
     @Provides
     fun provideSignInUseCase(): SignInUseCase =

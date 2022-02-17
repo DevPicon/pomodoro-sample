@@ -9,7 +9,7 @@ abstract class SuspendableUseCase<in P, out R>(
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default
 ) {
 
-    suspend operator fun invoke(parameters: P): ResultWrapper {
+    suspend operator fun invoke(parameters: P): ResultWrapper<R> {
         return withContext(coroutineDispatcher) {
             try {
                 ResultWrapper.Success<R>(execute(parameters))
