@@ -2,8 +2,10 @@ package pe.devpicon.android.codelab.pomodoro.core
 
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputLayout
 
 fun Fragment.showSnackBar(
     message: String,
@@ -24,4 +26,8 @@ fun Fragment.showSnackBarError(
     duration: Int = Snackbar.LENGTH_LONG
 ) {
     showSnackBar(message, duration, com.google.android.material.R.color.design_default_color_error)
+}
+
+fun TextInputLayout?.removeErrorOnTyping() {
+    this?.editText?.doOnTextChanged { _, _, _, _ -> error = null }
 }

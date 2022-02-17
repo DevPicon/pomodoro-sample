@@ -72,5 +72,13 @@
         <item name="android:background">?attr/colorPrimary</item>
     </style>
 
+    <!-- UI Components -->
+    <style name="MainButtonRounded" parent="Widget.AppCompat.Button">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:background">@drawable/circle_primary_background</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
 
 </resources>
