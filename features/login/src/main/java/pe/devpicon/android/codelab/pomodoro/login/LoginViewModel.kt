@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import pe.devpicon.android.codelab.pomodoro.core.Event
 import pe.devpicon.android.codelab.pomodoro.core.SnackBarError
@@ -12,8 +13,10 @@ import pe.devpicon.android.codelab.pomodoro.domain.common.ResultWrapper
 import pe.devpicon.android.codelab.pomodoro.domain.model.User
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.login.SignInUseCase
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.login.SignUpUseCase
+import javax.inject.Inject
 
-class LoginViewModel(
+@HiltViewModel
+class LoginViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
     private val signInUseCase: SignInUseCase
 ) : ViewModel() {

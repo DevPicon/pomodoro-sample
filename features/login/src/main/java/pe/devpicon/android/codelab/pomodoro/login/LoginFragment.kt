@@ -12,17 +12,14 @@ import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import pe.devpicon.android.codelab.pomodoro.core.showSnackBarError
-import pe.devpicon.android.codelab.pomodoro.di.DomainModule
 import pe.devpicon.android.codelab.pomodoro.login.databinding.FragmentLoginBinding
 
+@AndroidEntryPoint
 class LoginFragment : Fragment() {
 
-    private val viewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory(
-            DomainModule.signInUseCase, DomainModule.signUpUseCase
-        )
-    }
+    private val viewModel: LoginViewModel by viewModels ()
 
     private lateinit var binding: FragmentLoginBinding
 
