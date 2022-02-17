@@ -3,7 +3,7 @@ package pe.devpicon.android.codelab.pomodoro
 import androidx.navigation.NavController
 import pe.devpicon.android.codelab.pomodoro.login.LoginFragmentDirections
 import pe.devpicon.android.codelab.pomodoro.login.LoginNavigator
-import javax.inject.Inject
+import java.lang.ref.WeakReference
 
 object RouteNavigator : LoginNavigator {
     private var navController: WeakReference<NavController>? = null
@@ -17,6 +17,7 @@ object RouteNavigator : LoginNavigator {
     }
 
     override fun navigateOnLoginSuccess() {
-        navController?.navigate(LoginFragmentDirections.actionLoginFragmentToTaskListFragment())
+        navController?.get()
+            ?.navigate(LoginFragmentDirections.actionLoginFragmentToTaskListFragment())
     }
 }
