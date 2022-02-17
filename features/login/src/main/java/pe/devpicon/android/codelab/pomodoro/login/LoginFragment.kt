@@ -13,13 +13,18 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import pe.devpicon.android.codelab.pomodoro.core.observeEvent
 import pe.devpicon.android.codelab.pomodoro.core.showSnackBarError
 import pe.devpicon.android.codelab.pomodoro.login.databinding.FragmentLoginBinding
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
 
-    private val viewModel: LoginViewModel by viewModels ()
+    private val viewModel: LoginViewModel by viewModels()
+
+    @Inject
+    lateinit var navigator: LoginNavigator
 
     private lateinit var binding: FragmentLoginBinding
 
@@ -87,8 +92,14 @@ class LoginFragment : Fragment() {
             onNewState(it.peekContent())
         }
 
-        viewModel.error.observe(viewLifecycleOwner){
+        viewModel.error.observe(viewLifecycleOwner) {
             showSnackBarError(it.peekContent().message)
+        }
+
+        viewModel.navigationToTaskList.observeEvent(viewLifecycleOwner) {
+            if (it) {
+                navigator.navigateOnLoginSuccess()
+            }
         }
     }
 

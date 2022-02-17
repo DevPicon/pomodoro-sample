@@ -4,6 +4,7 @@ plugins {
     id "kotlin-android"
     id "kotlin-kapt"
     id 'dagger.hilt.android.plugin'
+    id "androidx.navigation.safeargs"
 }
 
 android {
@@ -54,7 +55,7 @@ dependencies {
 
     // Navigation Component
     // https://developer.android.com/guide/navigation/navigation-getting-started#Set-up
-    def nav_version = "2.4.0"
+    def nav_version = "2.4.1"
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
 
