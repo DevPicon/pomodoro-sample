@@ -14,8 +14,10 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pe.devpicon.android.codelab.pomodoro.core.observeEvent
 import pe.devpicon.android.codelab.pomodoro.core.showSnackBarError
+import pe.devpicon.android.codelab.pomodoro.task.TaskNavigator
 import pe.devpicon.android.codelab.pomodoro.task.databinding.FragmentTaskListBinding
 import pe.devpicon.android.codelab.pomodoro.task.list.adapter.TaskListAdapter
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TaskListFragment : Fragment() {
@@ -25,6 +27,9 @@ class TaskListFragment : Fragment() {
     private val taskListAdapter: TaskListAdapter by lazy {
         TaskListAdapter()
     }
+
+    @Inject
+    lateinit var navigator: TaskNavigator
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,7 +94,7 @@ class TaskListFragment : Fragment() {
     private fun observeEffects() {
         viewModel.navigationToCreateTask.observeEvent(viewLifecycleOwner) {
             if (it) {
-                TODO("Navigate to CreateTask")
+                navigator.navigateOnToCreateTask()
             }
         }
 
@@ -104,10 +109,17 @@ class TaskListFragment : Fragment() {
 
     private fun initViews() {
         setupAddButton()
+        configureStatusView()
     }
 
     private fun setupAddButton() {
         binding.fbAddTask.setOnClickListener {
+            viewModel.postEvent(TaskListScreenEvent.AddTaskPressed)
+        }
+    }
+
+    private fun configureStatusView() {
+        binding.statusView.setButtonAction {
             viewModel.postEvent(TaskListScreenEvent.AddTaskPressed)
         }
     }

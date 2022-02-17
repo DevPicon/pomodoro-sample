@@ -8,7 +8,17 @@
         android:id="@+id/task_list_fragment"
         android:name="pe.devpicon.android.codelab.pomodoro.task.list.TaskListFragment"
         android:label="">
-        <!-- here we will define the actions -->
+
+        <action
+            android:id="@+id/action_task_list_fragment_to_create_task"
+            app:destination="@id/task_create_fragment" />
+
     </fragment>
+
+
+    <fragment
+        android:id="@+id/task_create_fragment"
+        android:name="pe.devpicon.android.codelab.pomodoro.task.create.CreateTaskFragment"
+        android:label="" />
 
 </navigation>
