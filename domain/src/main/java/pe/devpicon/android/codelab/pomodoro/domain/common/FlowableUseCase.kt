@@ -11,7 +11,7 @@ abstract class FlowableUseCase<in P, out R>(
     private val coroutineDispatcher: CoroutineDispatcher = Dispatchers.Default
 ) {
 
-    operator fun invoke(parameters: P): Flow<ResultWrapper> {
+    operator fun invoke(parameters: P): Flow<ResultWrapper<R>> {
         return flow {
             try {
                 execute(parameters).collect {
