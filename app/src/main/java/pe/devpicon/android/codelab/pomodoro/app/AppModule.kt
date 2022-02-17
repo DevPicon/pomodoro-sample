@@ -6,6 +6,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import pe.devpicon.android.codelab.pomodoro.RouteNavigator
 import pe.devpicon.android.codelab.pomodoro.login.LoginNavigator
+import pe.devpicon.android.codelab.pomodoro.task.TaskNavigator
 import javax.inject.Singleton
 
 
@@ -21,5 +22,8 @@ object AppModule {
     @Provides
     fun provideRouteNavigator(): RouteNavigator = RouteNavigator
 
+    @Singleton
+    @Provides
+    fun provideTaskNavigator(): TaskNavigator = RouteNavigator
 }
 

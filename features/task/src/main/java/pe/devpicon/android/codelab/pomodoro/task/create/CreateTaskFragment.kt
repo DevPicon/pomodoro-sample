@@ -24,6 +24,7 @@ import pe.devpicon.android.codelab.pomodoro.core.showSnackBarError
 import pe.devpicon.android.codelab.pomodoro.task.R
 import pe.devpicon.android.codelab.pomodoro.task.TaskNavigator
 import pe.devpicon.android.codelab.pomodoro.task.databinding.FragmentCreateTaskBinding
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -32,6 +33,7 @@ class CreateTaskFragment : Fragment() {
     private val viewModel: CreateTaskViewModel by viewModels()
     private lateinit var binding: FragmentCreateTaskBinding
 
+    @Inject
     lateinit var navigator: TaskNavigator
 
     override fun onCreateView(
