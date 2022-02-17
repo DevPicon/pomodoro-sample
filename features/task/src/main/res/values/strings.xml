@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Task List-->
+    <string name="task_list_title">Task List</string>
+    <string name="task_list_empty_state_title">You don\'t have any task yet</string>
+    <string name="task_list_empty_state_subtitle">Do you want to create one?</string>
+    <string name="task_list_empty_state_button">Create</string>
+
+    <!-- Create Task -->
+    <string name="create_task_title">Create task</string>
+    <string name="create_task_success">Task created!</string>
+    <string name="create_task_task_name_hint">What are you working on?</string>
+    <string name="create_task_estimated_pomodoros">Estimated pomodoros</string>
+    <string name="create_task_invalid_name">Invalid name for this task</string>
+
+    <!-- Action Menu -->
+    <string name="action_menu_delete">Delete</string>
+    <string name="action_menu_title">%d Selected</string>
+    <string name="action_menu_share">Share</string>
+    <string name="action_menu_save">Save</string>
+
+</resources>
