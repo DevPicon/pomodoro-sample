@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_ripple_background"
+    android:minHeight="80dp"
+    android:padding="@dimen/material_default_activity_margin">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/iv_task_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tv_task_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_check_task"
+        tools:visibility="visible" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_task_name"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/tv_task_date"
+        app:layout_constraintEnd_toStartOf="@id/tv_est_pommodoros"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Este es el nombre de la task" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_task_date"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/tv_est_pommodoros"
+        app:layout_constraintStart_toStartOf="@id/tv_task_name"
+        app:layout_constraintTop_toBottomOf="@id/tv_task_name"
+        tools:text="20-02-203" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_est_pommodoros"
+        style="@style/TextAppearance.MaterialComponents.Headline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        tools:text="5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

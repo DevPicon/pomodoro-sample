@@ -36,6 +36,10 @@ class LoginViewModel @Inject constructor(
     val error: LiveData<Event<SnackBarError>>
         get() = _error
 
+    private val _navigationToTaskList: MutableLiveData<Event<Boolean>> = MutableLiveData()
+    val navigationToTaskList: LiveData<Event<Boolean>>
+        get() = _navigationToTaskList
+
     fun postEvent(event: LoginScreenEvent) {
         when (event) {
             is LoginScreenEvent.OnMainButtonClicked -> {
@@ -71,8 +75,8 @@ class LoginViewModel @Inject constructor(
                     _screenState.value = Event(LoginScreenState.SignUp)
                     onFailure(result.error)
                 }
-                is ResultWrapper.Success<*> -> {
-                    onSignUpSuccess(result.value as User)
+                is ResultWrapper.Success<User> -> {
+                    onSignUpSuccess(result.value)
                 }
             }
 
@@ -95,13 +99,11 @@ class LoginViewModel @Inject constructor(
     }
 
     private fun onSignUpSuccess(user: User) {
-        _screenState.value =
-            Event(LoginScreenState.Success("Generated token signup: ${user.token}"))
+        _navigationToTaskList.value = Event(true)
     }
 
     private fun onSignInSuccess(user: User) {
-        _screenState.value =
-            Event(LoginScreenState.Success("Generated token signin: ${user.token}"))
+        _navigationToTaskList.value = Event(true)
     }
 
     private fun startSignIn() {
@@ -118,8 +120,8 @@ class LoginViewModel @Inject constructor(
                     _screenState.value = Event(LoginScreenState.SignIn)
                     onFailure(result.error)
                 }
-                is ResultWrapper.Success<*> -> {
-                    onSignInSuccess(result.value as User)
+                is ResultWrapper.Success<User> -> {
+                    onSignInSuccess(result.value)
                 }
             }
         }
