@@ -15,12 +15,16 @@ import dagger.hilt.android.AndroidEntryPoint
 import pe.devpicon.android.codelab.pomodoro.core.observeEvent
 import pe.devpicon.android.codelab.pomodoro.core.showSnackBarError
 import pe.devpicon.android.codelab.pomodoro.task.databinding.FragmentTaskListBinding
+import pe.devpicon.android.codelab.pomodoro.task.list.adapter.TaskListAdapter
 
 @AndroidEntryPoint
 class TaskListFragment : Fragment() {
 
     private val viewModel: TaskListViewModel by viewModels()
     private lateinit var binding: FragmentTaskListBinding
+    private val taskListAdapter: TaskListAdapter by lazy {
+        TaskListAdapter()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,17 +64,24 @@ class TaskListFragment : Fragment() {
                 showLoading()
                 hideAddButton()
                 hideEmptyState()
+                hideList()
             }
             is TaskListScreenState.DataLoaded -> {
                 hideLoading()
                 showAddButton()
                 hideEmptyState()
                 showAddButton()
+                showList()
+
+                this.taskListAdapter.submitList(state.taskList.toMutableList())
             }
             TaskListScreenState.EmptyState -> {
                 hideLoading()
                 hideAddButton()
                 showEmptyState()
+                hideList()
+
+                this.taskListAdapter.submitList(mutableListOf())
             }
         }
     }
@@ -123,6 +134,14 @@ class TaskListFragment : Fragment() {
 
     private fun hideEmptyState() {
         binding.statusView.isGone = true
+    }
+
+    private fun showList() {
+        binding.rvTasks.isVisible = true
+    }
+
+    private fun hideList() {
+        binding.rvTasks.isGone = true
     }
 
 }
