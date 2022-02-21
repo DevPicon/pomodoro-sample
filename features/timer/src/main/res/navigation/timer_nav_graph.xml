@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/timer_nav_graph"
+    app:startDestination="@id/timer_fragment">
+
+    <fragment
+        android:id="@+id/timer_fragment"
+        android:name="pe.devpicon.android.codelab.pomodoro.timer.TimerFragment"
+        android:label="">
+        <argument
+            android:name="taskId"
+            app:argType="long" />
+        <argument
+            android:name="taskName"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
+
+</navigation>

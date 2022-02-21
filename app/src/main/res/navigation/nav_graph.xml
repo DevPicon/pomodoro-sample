@@ -6,5 +6,6 @@
 
     <include app:graph="@navigation/login_nav_graph" />
     <include app:graph="@navigation/task_nav_graph" />
+    <include app:graph="@navigation/timer_nav_graph" />
 
 </navigation>

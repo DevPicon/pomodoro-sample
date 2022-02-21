@@ -13,6 +13,18 @@
             android:id="@+id/action_task_list_fragment_to_create_task"
             app:destination="@id/task_create_fragment" />
 
+        <action
+            android:id="@+id/action_task_list_fragment_to_timer"
+            app:destination="@+id/timer_nav_graph">
+            <argument
+                android:name="taskId"
+                app:argType="long" />
+            <argument
+                android:name="taskName"
+                app:argType="string"
+                app:nullable="true" />
+        </action>
+
     </fragment>
 
 

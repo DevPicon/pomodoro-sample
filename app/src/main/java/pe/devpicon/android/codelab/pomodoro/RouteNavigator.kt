@@ -31,4 +31,11 @@ object RouteNavigator : LoginNavigator, TaskNavigator {
     override fun onBack() {
         navController?.get()?.popBackStack()
     }
+
+    override fun navigateOnToTimer(id: Long, name: String?) {
+        navController?.get()
+            ?.navigate(
+                TaskListFragmentDirections.actionTaskListFragmentToTimer(id, name)
+            )
+    }
 }

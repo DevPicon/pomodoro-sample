@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import pe.devpicon.android.codelab.pomodoro.task.databinding.RowTaskItemBinding
 
-class TaskListAdapter : ListAdapter<TaskListItem, TaskListViewHolder>(DIFF_CALLBACK) {
+class TaskListAdapter(
+    private val onItemSelector: OnItemClick<TaskListItem>
+) : ListAdapter<TaskListItem, TaskListViewHolder>(DIFF_CALLBACK) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskListViewHolder {
         val binding = RowTaskItemBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -17,6 +19,11 @@ class TaskListAdapter : ListAdapter<TaskListItem, TaskListViewHolder>(DIFF_CALLB
     }
 
     override fun onBindViewHolder(holder: TaskListViewHolder, position: Int) {
+
+        holder.itemView.setOnClickListener {
+            onItemSelector.onItemClick(getItem(holder.adapterPosition))
+        }
+
         holder.bind(getItem(holder.adapterPosition))
     }
 
