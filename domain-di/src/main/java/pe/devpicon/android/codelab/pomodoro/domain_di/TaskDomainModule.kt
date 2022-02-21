@@ -14,12 +14,20 @@ import pe.devpicon.android.codelab.pomodoro.data.repository.TaskRepositoryImpl
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.task.CreateTaskUseCase
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.task.DeleteTaskUseCase
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.task.GetAllTaskUseCase
+import pe.devpicon.android.codelab.pomodoro.domain.usecase.task.GetTaskByIdUseCase
 
 @Module
 @InstallIn(SingletonComponent::class)
 object TaskDomainModule {
 
     private lateinit var database: PomodoroDatabase
+
+    @Provides
+    fun provideGetTaskByIdUseCase(@ApplicationContext context: Context): GetTaskByIdUseCase =
+        GetTaskByIdUseCase(
+            repository = provideTaskRepository(context),
+            errorHandler = ErrorHandlerImpl()
+        )
 
     @Provides
     fun provideGetAllTaskUseCase(@ApplicationContext context: Context): GetAllTaskUseCase =
