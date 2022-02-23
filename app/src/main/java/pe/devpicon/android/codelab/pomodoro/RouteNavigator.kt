@@ -5,9 +5,10 @@ import pe.devpicon.android.codelab.pomodoro.login.LoginFragmentDirections
 import pe.devpicon.android.codelab.pomodoro.login.LoginNavigator
 import pe.devpicon.android.codelab.pomodoro.task.TaskNavigator
 import pe.devpicon.android.codelab.pomodoro.task.list.TaskListFragmentDirections
+import pe.devpicon.android.codelab.pomodoro.timer.TimerNavigator
 import java.lang.ref.WeakReference
 
-object RouteNavigator : LoginNavigator, TaskNavigator {
+object RouteNavigator : LoginNavigator, TaskNavigator, TimerNavigator {
     private var navController: WeakReference<NavController>? = null
 
     fun bind(nav: NavController) {
