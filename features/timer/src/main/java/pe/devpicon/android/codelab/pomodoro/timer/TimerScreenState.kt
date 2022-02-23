@@ -14,6 +14,4 @@ sealed class TimerScreenState {
         @PomodoroMode val mode: Int
     ) : TimerScreenState()
 
-    class Error(val error: String) : TimerScreenState()
-    object CounterStart : TimerScreenState()
 }

@@ -80,5 +80,9 @@
         <item name="android:padding">10dp</item>
     </style>
 
+    <style name="TimerTextStyle" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
 
 </resources>
