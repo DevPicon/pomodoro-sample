@@ -3,33 +3,17 @@ package pe.devpicon.android.codelab.pomodoro.sync.workmanager
 import android.content.Context
 import android.os.Build
 import androidx.work.*
-import pe.devpicon.android.codelab.pomodoro.data.local.UserLocalDataSource
-import pe.devpicon.android.codelab.pomodoro.data.remote.TaskRemoteDataSource
 import pe.devpicon.android.codelab.pomodoro.data.remote.firebase.TaskApi
-import pe.devpicon.android.codelab.pomodoro.data.sync.SyncErrorHandler
 import pe.devpicon.android.codelab.pomodoro.data.sync.SyncType
 import pe.devpicon.android.codelab.pomodoro.sync.workmanager.workers.InsertTaskWorker
 import java.time.Duration
 import java.util.concurrent.TimeUnit
 
 class SynchronizerImpl(
-    context: Context,
-    userLocalDataSource: UserLocalDataSource,
-    taskRemoteDataSource: TaskRemoteDataSource,
-    errorHandler: SyncErrorHandler
+    context: Context
 ) : Synchronizer {
 
-    private var workManager: WorkManager
-
-    init {
-        WorkManager.initialize(
-            context,
-            WorkManagerConfiguration(
-                userLocalDataSource, taskRemoteDataSource, errorHandler
-            ).workManagerConfiguration
-        )
-        workManager = WorkManager.getInstance(context)
-    }
+    private var workManager: WorkManager = WorkManager.getInstance(context)
 
     override fun performSync(task: TaskApi, type: SyncType) {
         val requestBuilder = OneTimeWorkRequest.Builder(getWorkByType(type))
@@ -60,7 +44,7 @@ class SynchronizerImpl(
     private fun buildData(task: TaskApi): Data {
         val data = Data.Builder()
 
-        data.putLong(InsertTaskWorker.TASK_ID_ARGS, task.id ?: -1L)
+        data.putLong(InsertTaskWorker.TASK_ID_ARGS, task.id)
         data.putString(InsertTaskWorker.TASK_NAME_ARGS, task.name)
         data.putLong(InsertTaskWorker.TASK_CREATION_DATE_ARGS, task.creationDate.time)
         data.putInt(InsertTaskWorker.TASK_DONE_POMODOROS_ARGS, task.donePomodoros)

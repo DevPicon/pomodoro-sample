@@ -18,7 +18,7 @@ class SyncManagerImpl(
 ) : SyncManager {
 
     private var synchronizer: Synchronizer = SynchronizerImpl(
-        context, userLocalDataSource, taskRemoteDataSource, errorHandler
+        context
     )
 
     override fun performSyncInsertion(task: TaskApi) {
