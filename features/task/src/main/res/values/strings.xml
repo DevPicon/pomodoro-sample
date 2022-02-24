@@ -19,5 +19,6 @@
     <string name="action_menu_title">%d Selected</string>
     <string name="action_menu_share">Share</string>
     <string name="action_menu_save">Save</string>
+    <string name="random_activity">Would you like a Random activity?</string>
 
 </resources>

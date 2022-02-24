@@ -84,6 +84,7 @@ class CreateTaskFragment : Fragment() {
                 showUI()
                 binding.tilTaskName.editText?.setText(state.name)
                 binding.pcvCounter.count = state.estimated
+                binding.lpiTryRandom.isVisible = state.showInlineLoader
             }
             is CreateTaskScreenState.InvalidName -> {
                 showUI()
@@ -109,6 +110,13 @@ class CreateTaskFragment : Fragment() {
         configureToolbar()
         configureEditText()
         configureCounter()
+        configureRandomButton()
+    }
+
+    private fun configureRandomButton() {
+        binding.btnTryRandom.setOnClickListener {
+            viewModel.postEvent(CreateTaskScreenEvent.OnPressRandomButton)
+        }
     }
 
     private fun configureEditText() {
