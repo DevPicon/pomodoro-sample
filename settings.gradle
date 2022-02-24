@@ -4,6 +4,8 @@ pluginManagement {
         google()
         mavenCentral()
         maven { url("https://oss.sonatype.org/content/repositories/snapshots/") }
+        jcenter() // Warning: this repository is not receiving updates
+        maven {url 'https://mvnrepository.com'} // ADDED THIS
     }
 }
 dependencyResolutionManagement {
