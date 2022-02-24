@@ -54,6 +54,30 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_try_random"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="64dp"
+            android:minHeight="36dp"
+            android:text="@string/random_activity"
+            android:textAppearance="?attr/textAppearanceButton"
+            android:textColor="?attr/colorPrimary"
+            app:layout_constraintStart_toStartOf="@id/til_task_name"
+            app:layout_constraintTop_toBottomOf="@id/til_task_name" />
+
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/lpi_try_random"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            app:layout_constraintBottom_toBottomOf="@id/btn_try_random"
+            app:layout_constraintEnd_toEndOf="@id/btn_try_random"
+            app:layout_constraintStart_toStartOf="@id/btn_try_random"
+            app:layout_constraintTop_toBottomOf="@id/btn_try_random" />
+
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_est_pomodoros"
             style="@style/TextAppearance.MaterialComponents.Body2"
@@ -71,7 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/til_task_name" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_try_random" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
