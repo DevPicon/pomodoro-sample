@@ -1,6 +1,8 @@
 package pe.devpicon.android.codelab.pomodoro.domain_di
 
 import android.content.Context
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -8,19 +10,26 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import pe.devpicon.android.codelab.pomodoro.data.common.ErrorHandlerImpl
 import pe.devpicon.android.codelab.pomodoro.data.local.TaskLocalDataSourceImpl
+import pe.devpicon.android.codelab.pomodoro.data.local.UserLocalDataSourceImpl
 import pe.devpicon.android.codelab.pomodoro.data.local.database.PomodoroDatabase
 import pe.devpicon.android.codelab.pomodoro.data.mapper.TaskDomainMapper
+import pe.devpicon.android.codelab.pomodoro.data.remote.TaskRemoteDataSourceImpl
 import pe.devpicon.android.codelab.pomodoro.data.repository.TaskRepositoryImpl
+import pe.devpicon.android.codelab.pomodoro.data.sync.SyncManager
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.task.CreateTaskUseCase
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.task.DeleteTaskUseCase
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.task.GetAllTaskUseCase
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.task.GetTaskByIdUseCase
+import pe.devpicon.android.codelab.pomodoro.sync.SyncManagerImpl
+
+private const val DATABASE_URL = "https://pomodoro-f8378-default-rtdb.firebaseio.com/"
 
 @Module
 @InstallIn(SingletonComponent::class)
 object TaskDomainModule {
 
     private lateinit var database: PomodoroDatabase
+    private lateinit var syncManager: SyncManager
 
     @Provides
     fun provideGetTaskByIdUseCase(@ApplicationContext context: Context): GetTaskByIdUseCase =
@@ -54,8 +63,24 @@ object TaskDomainModule {
         localDataSource = TaskLocalDataSourceImpl(
             taskDao = privatelyProvideLocalDatabase(context).taskDao()
         ),
-        taskMapper = TaskDomainMapper()
+        taskMapper = TaskDomainMapper(),
+        syncManager = provideSyncManager(context)
     )
+
+    @Synchronized
+    private fun provideSyncManager(context: Context): SyncManager {
+        if (!::syncManager.isInitialized) {
+            syncManager = SyncManagerImpl(
+                context,
+                userLocalDataSource = UserLocalDataSourceImpl(),
+                taskRemoteDataSource = TaskRemoteDataSourceImpl(
+                    Firebase.database.getReferenceFromUrl(DATABASE_URL)
+                ),
+                errorHandler = ErrorHandlerImpl()
+            )
+        }
+        return syncManager
+    }
 
     @Synchronized
     private fun privatelyProvideLocalDatabase(context: Context): PomodoroDatabase {
