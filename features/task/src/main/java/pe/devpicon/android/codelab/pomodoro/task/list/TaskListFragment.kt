@@ -17,6 +17,7 @@ import pe.devpicon.android.codelab.pomodoro.core.observeEvent
 import pe.devpicon.android.codelab.pomodoro.core.showSnackBarError
 import pe.devpicon.android.codelab.pomodoro.task.TaskNavigator
 import pe.devpicon.android.codelab.pomodoro.task.databinding.FragmentTaskListBinding
+import pe.devpicon.android.codelab.pomodoro.task.list.adapter.OnItemClickImpl
 import pe.devpicon.android.codelab.pomodoro.task.list.adapter.TaskListAdapter
 import javax.inject.Inject
 
@@ -26,7 +27,7 @@ class TaskListFragment : Fragment() {
     private val viewModel: TaskListViewModel by viewModels()
     private lateinit var binding: FragmentTaskListBinding
     private val taskListAdapter: TaskListAdapter by lazy {
-        TaskListAdapter()
+        TaskListAdapter(OnItemClickImpl(navigator))
     }
 
     @Inject

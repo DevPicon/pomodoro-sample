@@ -4,12 +4,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.transform
 import pe.devpicon.android.codelab.pomodoro.data.local.TaskLocalDataSource
 import pe.devpicon.android.codelab.pomodoro.data.mapper.TaskDomainMapper
+import pe.devpicon.android.codelab.pomodoro.data.sync.SyncManager
 import pe.devpicon.android.codelab.pomodoro.domain.model.Task
 import pe.devpicon.android.codelab.pomodoro.domain.repository.TaskRepository
 
 class TaskRepositoryImpl(
     private val localDataSource: TaskLocalDataSource,
-    private val taskMapper: TaskDomainMapper
+    private val taskMapper: TaskDomainMapper,
+    private val syncManager: SyncManager
 ) : TaskRepository {
     override fun getAllTasks(): Flow<List<Task>> {
         return localDataSource.getAllTasks()
@@ -21,9 +23,12 @@ class TaskRepositoryImpl(
     }
 
     override suspend fun insertTask(task: Task): Long {
-        return localDataSource.insetTask(
+        val result = localDataSource.insetTask(
             taskMapper.fromTasktoDataModel(task)
         )
+        task.id = result
+        syncManager.performSyncInsertion(taskMapper.fromTaskToRemoteModel(task))
+        return result
     }
 
     override suspend fun deleteTasks(idList: List<Long>) {

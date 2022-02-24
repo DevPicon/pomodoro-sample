@@ -39,6 +39,7 @@ dependencies {
     implementation project(":core")
     implementation project(':features:login')
     implementation project(':features:task')
+    implementation project(':features:timer')
 
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
@@ -57,4 +58,10 @@ dependencies {
     def hilt_version = "2.38.1"
     implementation("com.google.dagger:hilt-android:$hilt_version")
     kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+
+    implementation "androidx.startup:startup-runtime:1.1.1"
+    // Workmanager
+    def work_version = "2.7.1"
+    // Kotlin + coroutines
+    implementation "androidx.work:work-runtime-ktx:$work_version"
 }

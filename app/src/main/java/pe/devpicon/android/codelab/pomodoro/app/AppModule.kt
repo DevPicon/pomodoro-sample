@@ -7,6 +7,7 @@ import dagger.hilt.components.SingletonComponent
 import pe.devpicon.android.codelab.pomodoro.RouteNavigator
 import pe.devpicon.android.codelab.pomodoro.login.LoginNavigator
 import pe.devpicon.android.codelab.pomodoro.task.TaskNavigator
+import pe.devpicon.android.codelab.pomodoro.timer.TimerNavigator
 import javax.inject.Singleton
 
 
@@ -25,5 +26,9 @@ object AppModule {
     @Singleton
     @Provides
     fun provideTaskNavigator(): TaskNavigator = RouteNavigator
+
+    @Singleton
+    @Provides
+    fun provideTimerNavigator(): TimerNavigator = RouteNavigator
 }
 

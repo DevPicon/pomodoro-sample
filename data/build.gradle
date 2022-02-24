@@ -47,6 +47,8 @@ dependencies {
 
     // Firebase
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+    implementation "com.google.firebase:firebase-core:20.1.0"
+    implementation "com.google.firebase:firebase-database-ktx:20.0.3"
 
     //Room
     def room_version = "2.4.1"
