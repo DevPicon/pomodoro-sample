@@ -22,8 +22,6 @@ import pe.devpicon.android.codelab.pomodoro.domain.usecase.task.GetAllTaskUseCas
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.task.GetTaskByIdUseCase
 import pe.devpicon.android.codelab.pomodoro.sync.SyncManagerImpl
 
-private const val DATABASE_URL = "https://pomodoro-f8378-default-rtdb.firebaseio.com/"
-
 @Module
 @InstallIn(SingletonComponent::class)
 object TaskDomainModule {
@@ -74,7 +72,7 @@ object TaskDomainModule {
                 context,
                 userLocalDataSource = UserLocalDataSourceImpl(),
                 taskRemoteDataSource = TaskRemoteDataSourceImpl(
-                    Firebase.database.getReferenceFromUrl(DATABASE_URL)
+                    Firebase.database.reference
                 ),
                 errorHandler = ErrorHandlerImpl()
             )
