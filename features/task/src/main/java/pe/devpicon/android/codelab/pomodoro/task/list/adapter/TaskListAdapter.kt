@@ -24,6 +24,11 @@ class TaskListAdapter(
             onItemSelector.onItemClick(getItem(holder.adapterPosition))
         }
 
+        holder.itemView.setOnLongClickListener {
+            onItemSelector.onLongPress(0)
+            true
+        }
+
         holder.bind(getItem(holder.adapterPosition))
     }
 

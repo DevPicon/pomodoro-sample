@@ -2,10 +2,7 @@ package pe.devpicon.android.codelab.pomodoro.task.list
 
 import android.content.Context
 import android.os.Bundle
-import android.view.ContextThemeWrapper
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -27,11 +24,21 @@ class TaskListFragment : Fragment() {
     private val viewModel: TaskListViewModel by viewModels()
     private lateinit var binding: FragmentTaskListBinding
     private val taskListAdapter: TaskListAdapter by lazy {
-        TaskListAdapter(OnItemClickImpl(navigator))
+        TaskListAdapter(
+            OnItemClickImpl(navigator, ::startActionMode)
+        )
     }
+
+    private var actionMode: ActionMode? = null
 
     @Inject
     lateinit var navigator: TaskNavigator
+
+    private fun startActionMode() {
+        this.actionMode = requireActivity().startActionMode(
+            TaskListActionModeCallback()
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
