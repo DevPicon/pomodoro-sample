@@ -12,6 +12,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import pe.devpicon.android.codelab.pomodoro.core.observeEvent
 import pe.devpicon.android.codelab.pomodoro.core.showSnackBarError
+import pe.devpicon.android.codelab.pomodoro.task.R
 import pe.devpicon.android.codelab.pomodoro.task.TaskNavigator
 import pe.devpicon.android.codelab.pomodoro.task.databinding.FragmentTaskListBinding
 import pe.devpicon.android.codelab.pomodoro.task.list.adapter.OnItemClickImpl
@@ -25,7 +26,7 @@ class TaskListFragment : Fragment() {
     private lateinit var binding: FragmentTaskListBinding
     private val taskListAdapter: TaskListAdapter by lazy {
         TaskListAdapter(
-            OnItemClickImpl(navigator, ::startActionMode)
+            OnItemClickImpl(navigator, ::startActionMode, ::onItemClicked)
         )
     }
 
@@ -34,7 +35,7 @@ class TaskListFragment : Fragment() {
     @Inject
     lateinit var navigator: TaskNavigator
 
-    private fun startActionMode() {
+    private fun startActionMode(selectedItemCount: Int) {
         this.actionMode = requireActivity().startActionMode(
             TaskListActionModeCallback(object :
                 TaskListActionModeCallback.ActionModeCallbackEventListener {
@@ -51,7 +52,25 @@ class TaskListFragment : Fragment() {
                 }
             })
         )
+        this.actionMode?.title = getActionModeTitle(selectedItemCount)
     }
+
+    private fun onItemClicked(selectedItemCount: Int) {
+        this.actionMode?.also {
+            if (selectedItemCount > 0) {
+                it.title = getActionModeTitle(selectedItemCount)
+            } else {
+                finishActionMode()
+            }
+        }
+    }
+
+    private fun finishActionMode() {
+        this.actionMode?.finish()
+    }
+
+    private fun getActionModeTitle(selectedItemCount: Int) =
+        getString(R.string.action_menu_title, selectedItemCount)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

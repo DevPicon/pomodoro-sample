@@ -4,14 +4,15 @@ import pe.devpicon.android.codelab.pomodoro.task.TaskNavigator
 
 class OnItemClickImpl(
     private val navigator: TaskNavigator,
-    private val onStartActionMode: () -> Unit
+    private val onStartActionMode: (selectedItemCount:Int) -> Unit,
+    private val onItemClicked: (selectedItemCount:Int) -> Unit
 ) : OnItemClick<TaskListItem> {
     override fun onItemSelectedClick(selectedSize: Int) {
-        TODO("Not yet implemented")
+        onItemClicked.invoke(selectedSize)
     }
 
     override fun onLongPress(selectedSize: Int) {
-        onStartActionMode.invoke()
+        onStartActionMode.invoke(selectedSize)
     }
 
     override fun onItemClick(element: TaskListItem) {
