@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import pe.devpicon.android.codelab.pomodoro.core.Event
 import pe.devpicon.android.codelab.pomodoro.core.SnackBarError
 import pe.devpicon.android.codelab.pomodoro.domain.common.Error
@@ -48,7 +49,14 @@ class TaskListViewModel
             TaskListScreenEvent.AddTaskPressed -> {
                 _navigationToCreateTask.value = Event(true)
             }
-            TaskListScreenEvent.OnDeleteActionItemClicked -> TODO()
+            is TaskListScreenEvent.OnDeleteActionItemClicked -> {
+                viewModelScope.launch {
+                    deleteTaskUseCase(DeleteTaskUseCase.DeleteTaskUseCaseParams(
+                        event.selectedItemList.map { it.id }
+                    ))
+                }
+
+            }
             TaskListScreenEvent.OnFinishActionMode -> {
                 _screenState.value = Event(TaskListScreenState.HideActionMode)
             }

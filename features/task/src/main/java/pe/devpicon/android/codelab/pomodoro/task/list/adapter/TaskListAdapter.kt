@@ -1,5 +1,6 @@
 package pe.devpicon.android.codelab.pomodoro.task.list.adapter
 
+import android.annotation.SuppressLint
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -62,6 +63,19 @@ class TaskListAdapter(
             items.add(currentList[selectedItems.keyAt(i)])
         }
         return items
+    }
+
+    override fun submitList(list: MutableList<TaskListItem>?) {
+        clearSelection()
+        super.submitList(list)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun clearSelection() {
+        if (selectedItems.isNotEmpty()) {
+            selectedItems.clear()
+            notifyDataSetChanged()
+        }
     }
 
     companion object {

@@ -40,7 +40,11 @@ class TaskListFragment : Fragment() {
             TaskListActionModeCallback(object :
                 TaskListActionModeCallback.ActionModeCallbackEventListener {
                 override fun onDeleteActionItemClicked() {
-                    viewModel.postEvent(TaskListScreenEvent.OnDeleteActionItemClicked)
+                    viewModel.postEvent(
+                        TaskListScreenEvent.OnDeleteActionItemClicked(
+                            taskListAdapter.getSelectedItems()
+                        )
+                    )
                 }
 
                 override fun onShowActionMode() {
@@ -111,6 +115,7 @@ class TaskListFragment : Fragment() {
                 hideAddButton()
                 hideEmptyState()
                 hideList()
+                finishActionMode()
             }
             is TaskListScreenState.DataLoaded -> {
                 hideLoading()
@@ -118,6 +123,7 @@ class TaskListFragment : Fragment() {
                 hideEmptyState()
                 showAddButton()
                 showList()
+                finishActionMode()
 
                 this.taskListAdapter.submitList(state.taskList.toMutableList())
             }
@@ -126,6 +132,7 @@ class TaskListFragment : Fragment() {
                 hideAddButton()
                 showEmptyState()
                 hideList()
+                finishActionMode()
 
                 this.taskListAdapter.submitList(mutableListOf())
             }
