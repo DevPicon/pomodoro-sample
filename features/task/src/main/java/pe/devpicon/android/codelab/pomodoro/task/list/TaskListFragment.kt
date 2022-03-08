@@ -36,7 +36,20 @@ class TaskListFragment : Fragment() {
 
     private fun startActionMode() {
         this.actionMode = requireActivity().startActionMode(
-            TaskListActionModeCallback()
+            TaskListActionModeCallback(object :
+                TaskListActionModeCallback.ActionModeCallbackEventListener {
+                override fun onDeleteActionItemClicked() {
+                    viewModel.postEvent(TaskListScreenEvent.OnDeleteActionItemClicked)
+                }
+
+                override fun onShowActionMode() {
+                    viewModel.postEvent(TaskListScreenEvent.OnStartActionMode)
+                }
+
+                override fun onFinishActionMode() {
+                    viewModel.postEvent(TaskListScreenEvent.OnFinishActionMode)
+                }
+            })
         )
     }
 
@@ -96,6 +109,12 @@ class TaskListFragment : Fragment() {
                 hideList()
 
                 this.taskListAdapter.submitList(mutableListOf())
+            }
+            TaskListScreenState.HideActionMode -> {
+                showAddButton()
+            }
+            TaskListScreenState.ShowActionMode -> {
+                hideAddButton()
             }
         }
     }

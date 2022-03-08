@@ -6,7 +6,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import pe.devpicon.android.codelab.pomodoro.task.R
 
-class TaskListActionModeCallback : ActionMode.Callback {
+class TaskListActionModeCallback(
+    private val listener: ActionModeCallbackEventListener
+) : ActionMode.Callback {
     override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
         val inflater: MenuInflater = mode.menuInflater
         inflater.inflate(R.menu.menu_task_list, menu)
@@ -14,14 +16,14 @@ class TaskListActionModeCallback : ActionMode.Callback {
     }
 
     override fun onPrepareActionMode(p0: ActionMode?, p1: Menu?): Boolean {
-        //TODO
+        listener.onShowActionMode()
         return true
     }
 
     override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_delete -> {
-                //TODO
+                listener.onDeleteActionItemClicked()
                 true
             }
             else -> false
@@ -29,6 +31,12 @@ class TaskListActionModeCallback : ActionMode.Callback {
     }
 
     override fun onDestroyActionMode(p0: ActionMode?) {
-        //TODO
+        listener.onFinishActionMode()
+    }
+
+    interface ActionModeCallbackEventListener {
+        fun onDeleteActionItemClicked()
+        fun onShowActionMode()
+        fun onFinishActionMode()
     }
 }

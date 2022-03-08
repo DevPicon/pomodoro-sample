@@ -9,4 +9,6 @@ sealed class TaskListScreenState {
         val taskList: List<TaskListItem>
     ) : TaskListScreenState()
     object EmptyState : TaskListScreenState()
+    object ShowActionMode : TaskListScreenState()
+    object HideActionMode : TaskListScreenState()
 }

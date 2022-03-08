@@ -48,6 +48,13 @@ class TaskListViewModel
             TaskListScreenEvent.AddTaskPressed -> {
                 _navigationToCreateTask.value = Event(true)
             }
+            TaskListScreenEvent.OnDeleteActionItemClicked -> TODO()
+            TaskListScreenEvent.OnFinishActionMode -> {
+                _screenState.value = Event(TaskListScreenState.HideActionMode)
+            }
+            TaskListScreenEvent.OnStartActionMode -> {
+                _screenState.value = Event(TaskListScreenState.ShowActionMode)
+            }
         }
     }
 
