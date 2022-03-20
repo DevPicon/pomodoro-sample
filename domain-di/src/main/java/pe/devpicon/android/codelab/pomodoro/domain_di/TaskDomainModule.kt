@@ -1,8 +1,6 @@
 package pe.devpicon.android.codelab.pomodoro.domain_di
 
 import android.content.Context
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,10 +8,8 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import pe.devpicon.android.codelab.pomodoro.data.common.ErrorHandlerImpl
 import pe.devpicon.android.codelab.pomodoro.data.local.TaskLocalDataSourceImpl
-import pe.devpicon.android.codelab.pomodoro.data.local.UserLocalDataSourceImpl
 import pe.devpicon.android.codelab.pomodoro.data.local.database.PomodoroDatabase
 import pe.devpicon.android.codelab.pomodoro.data.mapper.TaskDomainMapper
-import pe.devpicon.android.codelab.pomodoro.data.remote.TaskRemoteDataSourceImpl
 import pe.devpicon.android.codelab.pomodoro.data.repository.TaskRepositoryImpl
 import pe.devpicon.android.codelab.pomodoro.data.sync.SyncManager
 import pe.devpicon.android.codelab.pomodoro.domain.usecase.task.CreateTaskUseCase
@@ -69,12 +65,7 @@ object TaskDomainModule {
     private fun provideSyncManager(context: Context): SyncManager {
         if (!::syncManager.isInitialized) {
             syncManager = SyncManagerImpl(
-                context,
-                userLocalDataSource = UserLocalDataSourceImpl(),
-                taskRemoteDataSource = TaskRemoteDataSourceImpl(
-                    Firebase.database.reference
-                ),
-                errorHandler = ErrorHandlerImpl()
+                context
             )
         }
         return syncManager

@@ -11,10 +11,7 @@ import pe.devpicon.android.codelab.pomodoro.sync.workmanager.Synchronizer
 import pe.devpicon.android.codelab.pomodoro.sync.workmanager.SynchronizerImpl
 
 class SyncManagerImpl(
-    context: Context,
-    userLocalDataSource: UserLocalDataSource,
-    taskRemoteDataSource: TaskRemoteDataSource,
-    errorHandler: SyncErrorHandler
+    context: Context
 ) : SyncManager {
 
     private var synchronizer: Synchronizer = SynchronizerImpl(
