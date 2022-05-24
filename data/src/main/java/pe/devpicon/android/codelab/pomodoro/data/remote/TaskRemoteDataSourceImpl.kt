@@ -3,7 +3,6 @@ package pe.devpicon.android.codelab.pomodoro.data.remote
 import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.tasks.await
 import pe.devpicon.android.codelab.pomodoro.data.remote.firebase.TaskApi
-import pe.devpicon.android.codelab.pomodoro.data.sync.SyncManager
 
 const val TASK_MAIN_URL = "tasks"
 
@@ -15,6 +14,14 @@ class TaskRemoteDataSourceImpl(
             .child(userId)
             .child(taskApi.id.toString())
             .setValue(taskApi)
+            .await()
+    }
+
+    override suspend fun deleteTask(userId: String, idTask: Long) {
+        database
+            .child(TASK_MAIN_URL)
+            .child(idTask.toString())
+            .removeValue()
             .await()
     }
 }

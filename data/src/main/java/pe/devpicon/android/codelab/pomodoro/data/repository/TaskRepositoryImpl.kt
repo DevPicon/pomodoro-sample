@@ -33,6 +33,8 @@ class TaskRepositoryImpl(
 
     override suspend fun deleteTasks(idList: List<Long>) {
         localDataSource.deleteTasks(idList)
+
+        idList.forEach { syncManager.performSyncDeletion(it) }
     }
 
     override suspend fun getTaskById(id: Long): Task {

@@ -5,7 +5,9 @@ import android.os.Build
 import androidx.work.*
 import pe.devpicon.android.codelab.pomodoro.data.remote.firebase.TaskApi
 import pe.devpicon.android.codelab.pomodoro.data.sync.SyncType
+import pe.devpicon.android.codelab.pomodoro.sync.workmanager.workers.DeleteTaskWorker
 import pe.devpicon.android.codelab.pomodoro.sync.workmanager.workers.InsertTaskWorker
+import pe.devpicon.android.codelab.pomodoro.sync.workmanager.workers.InsertTaskWorker.Companion.TASK_ID_ARGS
 import java.time.Duration
 import java.util.concurrent.TimeUnit
 
@@ -18,6 +20,26 @@ class SynchronizerImpl(
     override fun performSync(task: TaskApi, type: SyncType) {
         val requestBuilder = OneTimeWorkRequest.Builder(getWorkByType(type))
         requestBuilder.setInputData(buildData(task))
+        requestBuilder.setConstraints(getGeneralConstraints())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            requestBuilder.setBackoffCriteria(
+                BackoffPolicy.LINEAR,
+                Duration.ofMillis(OneTimeWorkRequest.MIN_BACKOFF_MILLIS)
+            )
+        } else {
+            requestBuilder.setBackoffCriteria(
+                BackoffPolicy.LINEAR,
+                OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
+                TimeUnit.MILLISECONDS
+            )
+        }
+
+        workManager.enqueue(requestBuilder.build())
+    }
+
+    override fun performSync(taskId: Long, type: SyncType) {
+        val requestBuilder = OneTimeWorkRequest.Builder(getWorkByType(type))
+        requestBuilder.setInputData(Data.Builder().putLong(TASK_ID_ARGS, taskId).build())
         requestBuilder.setConstraints(getGeneralConstraints())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             requestBuilder.setBackoffCriteria(
@@ -60,7 +82,7 @@ class SynchronizerImpl(
     private fun getWorkByType(type: SyncType): Class<out ListenableWorker> {
         return when (type) {
             SyncType.INSERT -> InsertTaskWorker::class.java
-            SyncType.DELETE -> TODO()
+            SyncType.DELETE -> DeleteTaskWorker::class.java
             SyncType.UPDATE -> TODO()
         }
     }

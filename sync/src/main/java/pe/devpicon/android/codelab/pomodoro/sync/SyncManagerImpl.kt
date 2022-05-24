@@ -1,10 +1,7 @@
 package pe.devpicon.android.codelab.pomodoro.sync
 
 import android.content.Context
-import pe.devpicon.android.codelab.pomodoro.data.local.UserLocalDataSource
-import pe.devpicon.android.codelab.pomodoro.data.remote.TaskRemoteDataSource
 import pe.devpicon.android.codelab.pomodoro.data.remote.firebase.TaskApi
-import pe.devpicon.android.codelab.pomodoro.data.sync.SyncErrorHandler
 import pe.devpicon.android.codelab.pomodoro.data.sync.SyncManager
 import pe.devpicon.android.codelab.pomodoro.data.sync.SyncType
 import pe.devpicon.android.codelab.pomodoro.sync.workmanager.Synchronizer
@@ -20,5 +17,9 @@ class SyncManagerImpl(
 
     override fun performSyncInsertion(task: TaskApi) {
         synchronizer.performSync(task, SyncType.INSERT)
+    }
+
+    override fun performSyncDeletion(taskId: Long) {
+        synchronizer.performSync(taskId, SyncType.DELETE)
     }
 }

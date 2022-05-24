@@ -7,6 +7,7 @@ import androidx.work.WorkerParameters
 import pe.devpicon.android.codelab.pomodoro.data.local.UserLocalDataSource
 import pe.devpicon.android.codelab.pomodoro.data.remote.TaskRemoteDataSource
 import pe.devpicon.android.codelab.pomodoro.data.sync.SyncErrorHandler
+import pe.devpicon.android.codelab.pomodoro.sync.workmanager.workers.DeleteTaskWorker
 import pe.devpicon.android.codelab.pomodoro.sync.workmanager.workers.InsertTaskWorker
 
 class TaskWorkerFactory(
@@ -23,6 +24,9 @@ class TaskWorkerFactory(
             InsertTaskWorker::class.java.name -> InsertTaskWorker(
                 appContext,
                 workerParameters, userLocalDataSource, taskRemoteDataSource, errorHandler
+            )
+            DeleteTaskWorker::class.java.name -> DeleteTaskWorker(
+                appContext, workerParameters, userLocalDataSource, taskRemoteDataSource, errorHandler
             )
             else -> null
         }
